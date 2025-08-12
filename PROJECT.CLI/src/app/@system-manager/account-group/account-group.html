@@ -1,0 +1,68 @@
+<nz-page-header nzBackIcon>
+    <nz-page-header-title>NHÓM TÀI KHOẢN</nz-page-header-title>
+    <nz-page-header-subtitle>Danh sách nhóm tài khoản</nz-page-header-subtitle>
+    <nz-page-header-extra>
+        <nz-space>
+            <input *nzSpaceItem nz-input placeholder="Tìm kiếm nhanh" [(ngModel)]="filter.keyWord"
+                (keydown.enter)="search()" />
+
+            <button *nzSpaceItem nz-button (click)="reset()">
+                <nz-icon nzType="sync" nzTheme="outline" />
+            </button>
+
+            <button *nzSpaceItem nz-button (click)="search()">
+                <nz-icon nzType="search" nzTheme="outline" />
+            </button>
+            @if(filter.orgId){
+            <button *nzSpaceItem nz-button nzType="primary" (click)="open('', false)">
+                <nz-icon nzType="plus" nzTheme="outline" />Thêm mới
+            </button>
+            }
+            
+        </nz-space>
+    </nz-page-header-extra>
+    <nz-page-header-content>
+        <nz-splitter>
+            <nz-splitter-panel nzDefaultSize="40%">
+                <div class="box tree-org">
+                    <nz-input-group [nzSuffix]="suffixIconSearchOrg" style="margin-bottom: 12px;">
+                        <input type="text" nz-input placeholder="Tìm kiếm đơn vị, phòng ban" [(ngModel)]="searchOrg" />
+                    </nz-input-group>
+                    <ng-template #suffixIconSearchOrg>
+                        <nz-icon nzType="search" />
+                    </ng-template>
+
+                    <nz-tree #treeComOrg [nzData]="displayedOrgTree" nzBlockNode [nzTreeTemplate]="nzTreeRightTemplate"
+                        [nzExpandedIcon]="multiExpandedIconTplRight" nzCheckStrictly="true"
+                        (nzClick)="onNodeClick($event)">
+                        <ng-template #nzTreeRightTemplate let-node>
+                            <div class="item-menu">
+                                <div>
+                                    <nz-tag nzColor="default">{{node.origin.id}}</nz-tag>
+                                    <span>{{ node.origin.name || node.title.split('_')[1] }}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template #multiExpandedIconTplRight let-node let-origin="origin">
+                            <span *ngIf="node.children.length > 0" nz-icon style="font-size: 10px"
+                                [nzType]="node.isExpanded ? 'caret-down' : 'caret-right'" nzTheme="outline"></span>
+                        </ng-template>
+                    </nz-tree>
+                </div>
+            </nz-splitter-panel>
+            <nz-splitter-panel>
+                <div class="box list-account-group">
+
+                </div>
+            </nz-splitter-panel>
+        </nz-splitter>
+    </nz-page-header-content>
+</nz-page-header>
+
+<!-- <div class="paging-container">
+    <div>Tổng {{data.totalRecord}} bản ghi</div>
+    <nz-pagination [nzPageIndex]="data.currentPage" [nzTotal]="data.totalRecord" nzShowSizeChanger
+        [nzPageSize]="data.pageSize" nzShowQuickJumper (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)">
+    </nz-pagination>
+</div> -->

@@ -1,0 +1,41 @@
+.log-container{
+    height: calc(100vh - 116px);
+    background: #262626;
+    padding: 12px;
+    border-radius: 2px;
+}
+
+.timestamp {
+  color: white;
+  margin: 0 0 0 12px;
+}
+
+.level {
+  margin-right: 8px;
+}
+
+.INF .level {
+  color: #61AFFE;
+  margin: 0 8px;
+}
+
+.ERR .level {
+  color: #f44336;
+  margin: 0 8px;
+}
+
+.WRN .level {
+  color: #ffc107; 
+  margin: 0 8px;
+}
+
+.TXT .level {
+  color: #90a4ae; 
+  margin: 0 8px;
+}
+
+.message {
+  white-space: pre-wrap;
+  color: #aaa;
+  font-weight: 600;
+}
